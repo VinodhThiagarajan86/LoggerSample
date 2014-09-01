@@ -1,0 +1,49 @@
+buildscript {
+	repositories {
+			maven {
+				url 'http://artifactory.bnsf.com:8081/artifactory/plugins-release'
+			}
+
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.5.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+
+jar {
+	baseName = 'log4jOwn'
+}
+
+
+
+
+repositories {
+			maven {
+				url 'http://artifactory.bnsf.com:8081/artifactory/plugins-release'
+			}
+
+	}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.3.3'
+	compile ('org.springframework.boot:spring-boot-starter-web'){
+		exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+	}
+	compile ('org.springframework.boot:spring-boot-starter-log4j')
+	
+	
+	
+	
+	
+	testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.11'
+}
